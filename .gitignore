@@ -1,0 +1,10 @@
+node_modules
+dist
+*.gb
+!examples/roms/*.gb
+!examples/vite/public/roms/*.gb
+.next
+.game-state
+external/
+.vercel
+.env*.local

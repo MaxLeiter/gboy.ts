@@ -1,0 +1,6 @@
+.next
+node_modules
+.game-state
+*.gb
+bun.lock
+.vercel

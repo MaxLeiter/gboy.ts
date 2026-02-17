@@ -1,0 +1,42 @@
+:root {
+  --gb-lightest: #9bbc0f;
+  --gb-light: #8bac0f;
+  --gb-dark: #306230;
+  --gb-darkest: #0f380f;
+  --gb-shell: #8b8b73;
+  --gb-shell-dark: #6b6b5a;
+  --gb-btn: #3c3c50;
+  --gb-btn-hover: #52526a;
+  --gb-btn-active: #2a2a3a;
+  --gb-dpad: #2c2c3e;
+  --gb-ab: #8b2252;
+  --gb-ab-hover: #a52a6a;
+  --gb-ab-active: #6b1a42;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Courier New", Courier, monospace;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  transition: filter 0.1s;
+}
+
+button:active {
+  filter: brightness(0.75);
+}

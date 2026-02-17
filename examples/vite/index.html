@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>gboy-ts - Game Boy Emulator in TypeScript</title>
+    <meta
+      name="description"
+      content="A Game Boy (DMG) emulator written in TypeScript. Runs in the browser with no server needed."
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Hero -->
+      <header class="hero">
+        <h1>gboy-ts</h1>
+        <p class="tagline">
+          A Game Boy emulator written in TypeScript. Runs in the browser, on
+          servers, and in serverless functions.
+          <a href="https://github.com/maxleiter/gboy.ts" target="_blank" rel="noopener noreferrer"
+            >View source on GitHub.</a
+          >
+        </p>
+      </header>
+
+      <!-- Demo -->
+      <section class="demo">
+        <div class="demo-layout">
+          <!-- Game Boy -->
+          <div class="shell">
+            <div class="shell-header">
+              <span class="brand">gboy-ts</span>
+              <span class="sub">GAME BOY</span>
+            </div>
+
+            <div class="bezel">
+              <canvas id="screen" width="160" height="144"></canvas>
+              <div class="status">
+                <span class="dot" id="dot"></span>
+                <span id="status-text">Loading 2048...</span>
+              </div>
+            </div>
+
+            <div class="controls-row">
+              <div class="dpad">
+                <button class="dpad-btn up" data-btn="up">&#9650;</button>
+                <button class="dpad-btn left" data-btn="left">&#9664;</button>
+                <div class="dpad-center"></div>
+                <button class="dpad-btn right" data-btn="right">&#9654;</button>
+                <button class="dpad-btn down" data-btn="down">&#9660;</button>
+              </div>
+              <div class="ab">
+                <div class="ab-col" style="margin-top: -16px">
+                  <button class="ab-btn" data-btn="a">A</button>
+                  <span class="ab-label">A</span>
+                </div>
+                <div class="ab-col">
+                  <button class="ab-btn" data-btn="b">B</button>
+                  <span class="ab-label">B</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pill-row">
+              <button class="pill-btn" data-btn="select">SELECT</button>
+              <button class="pill-btn" data-btn="start">START</button>
+            </div>
+          </div>
+
+          <!-- Controls sidebar -->
+          <div class="sidebar">
+            <div class="sidebar-section">
+              <h3>ROMs</h3>
+              <div class="rom-buttons">
+                <button class="rom-btn" data-rom="2048.gb">2048</button>
+                <button class="rom-btn" data-rom="dmg-acid2.gb">
+                  DMG Acid2
+                </button>
+                <label class="rom-btn file-label">
+                  Load .gb file&hellip;
+                  <input type="file" id="file-input" accept=".gb,.gbc" hidden />
+                </label>
+              </div>
+              <p class="sidebar-hint">
+                Or drag and drop a .gb file anywhere on the page.
+              </p>
+            </div>
+
+            <div class="sidebar-section">
+              <h3>Speed</h3>
+              <div class="speed-row">
+                <button class="speed-btn" data-speed="0">&#9208;</button>
+                <button class="speed-btn active" data-speed="1">
+                  1&times;
+                </button>
+                <button class="speed-btn" data-speed="2">2&times;</button>
+                <button class="speed-btn" data-speed="4">4&times;</button>
+                <button class="speed-btn" data-speed="8">8&times;</button>
+                <button class="speed-btn" data-speed="16">16&times;</button>
+              </div>
+            </div>
+
+            <div class="sidebar-section">
+              <h3>Audio</h3>
+              <div class="audio-row">
+                <button id="audio-toggle" class="rom-btn">Enable Audio</button>
+              </div>
+              <p class="sidebar-hint">State: <span id="audio-status">off</span></p>
+            </div>
+
+            <div class="sidebar-section">
+              <h3>Keyboard</h3>
+              <table class="key-table">
+                <tr>
+                  <td class="key">Arrow keys</td>
+                  <td>D-pad</td>
+                </tr>
+                <tr>
+                  <td class="key">Z</td>
+                  <td>A button</td>
+                </tr>
+                <tr>
+                  <td class="key">X</td>
+                  <td>B button</td>
+                </tr>
+                <tr>
+                  <td class="key">Enter</td>
+                  <td>Start</td>
+                </tr>
+                <tr>
+                  <td class="key">Backspace</td>
+                  <td>Select</td>
+                </tr>
+                <tr>
+                  <td class="key">Space</td>
+                  <td>Pause</td>
+                </tr>
+                <tr>
+                  <td class="key">] / [</td>
+                  <td>Speed up/down</td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="sidebar-section">
+              <div class="info-row">
+                <span id="info-last">Last: &mdash;</span>
+                <span class="sep">&bull;</span>
+                <span id="info-fps">0 fps</span>
+                <span class="sep">&bull;</span>
+                <button id="reset-btn" class="reset-btn">Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Install -->
+      <section class="install">
+        <h2>Install</h2>
+        <pre><code><strong>npm install gboy-ts</strong></code></pre>
+        <div class="code-block">
+          <pre><code><span class="kw">import</span> { Emulator, Button } <span class="kw">from</span> <span class="str">"gboy-ts"</span>;
+
+<span class="kw">const</span> rom = <span class="kw">new</span> Uint8Array(await fetch(<span class="str">"rom.gb"</span>).then(r => r.arrayBuffer()));
+<span class="kw">const</span> emu = <span class="kw">new</span> Emulator(rom);
+
+emu.runFrames(60);
+emu.pressButton(Button.A);
+emu.runFrames(10);
+
+<span class="kw">const</span> framebuffer = emu.getFramebuffer(); <span class="cmt">// 160x144 RGBA Uint8Array</span>
+<span class="kw">const</span> saveState  = emu.serialize();       <span class="cmt">// ~110KB, excludes ROM</span></code></pre>
+        </div>
+      </section>
+
+      <footer>
+        <a href="https://github.com/maxleiter/gboy.ts" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <span class="sep">&bull;</span>
+        <a href="https://www.npmjs.com/package/gboy-ts" target="_blank" rel="noopener noreferrer">npm</a>
+        <span class="sep">&bull;</span>
+        <span>MIT License</span>
+      </footer>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
