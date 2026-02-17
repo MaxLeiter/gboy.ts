@@ -18,7 +18,10 @@
         <p class="tagline">
           A Game Boy emulator written in TypeScript. Runs in the browser, on
           servers, and in serverless functions.
-          <a href="https://github.com/maxleiter/gboy.ts" target="_blank" rel="noopener noreferrer"
+          <a
+            href="https://github.com/maxleiter/gboy.ts"
+            target="_blank"
+            rel="noopener noreferrer"
             >View source on GitHub.</a
           >
         </p>
@@ -38,7 +41,7 @@
               <canvas id="screen" width="160" height="144"></canvas>
               <div class="status">
                 <span class="dot" id="dot"></span>
-                <span id="status-text">Loading 2048...</span>
+                <span id="status-text">Loading Pocket...</span>
               </div>
             </div>
 
@@ -73,6 +76,7 @@
             <div class="sidebar-section">
               <h3>ROMs</h3>
               <div class="rom-buttons">
+                <button class="rom-btn" data-rom="pocket.gb">Pocket</button>
                 <button class="rom-btn" data-rom="2048.gb">2048</button>
                 <button class="rom-btn" data-rom="dmg-acid2.gb">
                   DMG Acid2
@@ -82,9 +86,6 @@
                   <input type="file" id="file-input" accept=".gb,.gbc" hidden />
                 </label>
               </div>
-              <p class="sidebar-hint">
-                Or drag and drop a .gb file anywhere on the page.
-              </p>
             </div>
 
             <div class="sidebar-section">
@@ -106,7 +107,6 @@
               <div class="audio-row">
                 <button id="audio-toggle" class="rom-btn">Enable Audio</button>
               </div>
-              <p class="sidebar-hint">State: <span id="audio-status">off</span></p>
             </div>
 
             <div class="sidebar-section">
@@ -176,9 +176,19 @@ emu.runFrames(10);
       </section>
 
       <footer>
-        <a href="https://github.com/maxleiter/gboy.ts" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a
+          href="https://github.com/maxleiter/gboy.ts"
+          target="_blank"
+          rel="noopener noreferrer"
+          >GitHub</a
+        >
         <span class="sep">&bull;</span>
-        <a href="https://www.npmjs.com/package/gboy-ts" target="_blank" rel="noopener noreferrer">npm</a>
+        <a
+          href="https://www.npmjs.com/package/gboy-ts"
+          target="_blank"
+          rel="noopener noreferrer"
+          >npm</a
+        >
         <span class="sep">&bull;</span>
         <span>MIT License</span>
       </footer>

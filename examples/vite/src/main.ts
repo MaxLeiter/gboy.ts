@@ -8,7 +8,6 @@ const dot = document.getElementById("dot")!;
 const infoLast = document.getElementById("info-last")!;
 const infoFps = document.getElementById("info-fps")!;
 const audioToggleButton = document.getElementById("audio-toggle") as HTMLButtonElement;
-const audioStatus = document.getElementById("audio-status")!;
 
 const GB_FPS = 4194304 / 70224;
 const GB_FRAME_MS = 1000 / GB_FPS;
@@ -245,7 +244,6 @@ function updateAudioUI(): void {
   audioToggleButton.textContent = audioEnabled
     ? "Disable Audio"
     : "Enable Audio";
-  audioStatus.textContent = audioEnabled ? "on" : "off";
 }
 
 document.addEventListener("keydown", (event) => {
@@ -397,7 +395,7 @@ ctx.fillRect(0, 0, 160, 144);
 
 requestAnimationFrame(mainLoop);
 updateAudioUI();
-void loadROMFromURL("/roms/2048.gb");
+void loadROMFromURL("/roms/pocket.gb");
 
 window.addEventListener("beforeunload", () => {
   audioPlayer.dispose();
