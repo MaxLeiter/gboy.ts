@@ -4,7 +4,7 @@ A Game Boy emulator in TypeScript, designed for the browser and serverless envir
 
 The emulator runs headlessly with no DOM or Canvas dependency. Frames render to a raw `Uint8Array` RGBA buffer that can be encoded to PNG/JPEG or rendered to a terminal.
 
-[npm](https://www.npmjs.com/package/gboy.ts) | [Website](https://gboy-ts.vercel.app)
+[npm](https://www.npmjs.com/package/gboy-sts) | [Website](https://gboy-ts.vercel.app)
 
 Terminal screenshot:
 
